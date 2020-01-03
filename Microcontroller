@@ -1,0 +1,141 @@
+#include<reg51.h>
+sbit CLK=P0^1;
+sbit DAT=P0^2;
+char a,b,c1;
+void start();
+void sendadd(char a1);
+void sendmem1(char b1);
+void sendmem2(char b1);
+void senddata1(char c1);
+void ack();
+void stop();
+void main()
+{
+	a=0xA0;
+	b=0x00;
+	c1=0x50;
+	start();
+	sendadd(a);
+	ack();
+	sendmem1(b);
+	ack();
+	sendmem2(b);
+	ack();
+	senddata1(c1);
+	ack();
+	stop();
+}
+void start()
+{
+		CLK=0;
+		DAT=1;
+		CLK=1;	
+		DAT=0;	
+		CLK=0;
+}
+void sendadd(char a1)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=a1>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void sendmem1(char b1)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=b1>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void sendmem2(char b1)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=b1>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void senddata1(char c1)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=c1>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void senddata2(char c2)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=c2>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void senddata3(char c3)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=c3>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void senddata4(char c4)
+{
+	int i;
+	char x;
+	for(i=7;i>-1;i--)
+	{
+		x=c4>>i;
+		x=x&1;
+		CLK=0;
+		DAT=x;
+		CLK=1;
+	}
+}
+void ack()
+{
+	CLK=0;
+	CLK=1;
+	DAT=1;
+	CLK=0;
+}
+void stop()
+{
+	CLK=0;
+	DAT=0;
+	CLK=1;
+	DAT=1;
+	CLK=0;
+}
